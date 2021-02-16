@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "enlight",
+  "projects": {
+    "enlight": {
+      "projectType": "application",
+      "root": "apps/enlight",
+      "sourceRoot": "apps/enlight/src",
+      "prefix": "enlight",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/enlight",
+            "index": "apps/enlight/src/index.html",
+            "main": "apps/enlight/src/main.ts",
+            "polyfills": "apps/enlight/src/polyfills.ts",
+            "tsConfig": "apps/enlight/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/enlight/src/favicon.ico",
+              "apps/enlight/src/assets"
+            ],
+            "styles": ["apps/enlight/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/enlight/src/environments/environment.ts",
+                  "with": "apps/enlight/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "enlight:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "enlight:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "enlight:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/enlight/src/**/*.ts",
+              "apps/enlight/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/enlight"],
+          "options": {
+            "jestConfig": "apps/enlight/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "enlight-e2e": {
+      "root": "apps/enlight-e2e",
+      "sourceRoot": "apps/enlight-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/enlight-e2e/cypress.json",
+            "tsConfig": "apps/enlight-e2e/tsconfig.e2e.json",
+            "devServerTarget": "enlight:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "enlight:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/enlight-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
