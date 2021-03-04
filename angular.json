@@ -1,7 +1,7 @@
 {
   "version": 1,
   "cli": {
-    "defaultCollection": "@nrwl/angular"
+    "defaultCollection": "@ngrx/schematics"
   },
   "schematics": {
     "@nrwl/angular": {
@@ -51,7 +51,10 @@
               "apps/enlight/src/favicon.ico",
               "apps/enlight/src/assets"
             ],
-            "styles": ["apps/enlight/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "apps/enlight/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -112,7 +115,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/enlight"],
+          "outputs": [
+            "coverage/apps/enlight"
+          ],
           "options": {
             "jestConfig": "apps/enlight/jest.config.js",
             "passWithNoTests": true
@@ -141,7 +146,9 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/enlight-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/enlight-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }

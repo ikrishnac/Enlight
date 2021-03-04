@@ -1,0 +1,15 @@
+<div class="content">
+    <enlight-book-cards [books]="cart" [displayType]="'cartComponent'"></enlight-book-cards>
+</div>
+<div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="cart.length === 0">
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-card fxLayoutAlign="center center"><span><mat-icon>shopping_cart</mat-icon></span>Cart is empty</mat-card>
+    </div>
+</div>  
+<div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="cart.length > 0">
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+            <a mat-button (click)="checkOutCart()">Procceed to check out</a>
+        </mat-card-actions>
+    </div>
+</div>  

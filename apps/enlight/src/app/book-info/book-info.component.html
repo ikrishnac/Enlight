@@ -1,0 +1,36 @@
+<div class="content"  fxLayout="row" fxLayoutAlign="center center" *ngIf="bookDetails">
+    <div fxFlex="80%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-card >
+            <mat-card-header>
+                <mat-card-title *ngIf="bookDetails.volumeInfo.title">{{bookDetails.volumeInfo.title}}</mat-card-title>
+                <mat-card-subtitle *ngIf="bookDetails.volumeInfo.subtitle">{{bookDetails.volumeInfo.subtitle}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="!bookDetails.volumeInfo.subtitle">Subtitle unavailable to display</mat-card-subtitle>
+                <img *ngIf="!!bookDetails.volumeInfo.imageLinks && bookDetails.volumeInfo.imageLinks.thumbnail" mat-card-sm-image
+                    src="{{bookDetails.volumeInfo.imageLinks.thumbnail}}" alt="Photo of a Shiba Inu">
+            </mat-card-header>
+            <mat-card-content>
+                <span>Rating:</span><span> {{bookDetails.volumeInfo.averageRating}}</span>
+                <br/>
+                <span>publisher:</span><span> {{bookDetails.volumeInfo.publisher}}</span>
+                <br/>
+                <span>Page count:</span><span> {{bookDetails.volumeInfo.pageCount}}</span>
+                <br/>
+                <span>Language:</span><span> {{bookDetails.volumeInfo.language}}</span>
+                <br/>
+                <span>Description:</span>
+                <br/>
+                <p style="padding-left: 10px;" *ngIf="bookDetails.volumeInfo.description">
+                    {{bookDetails.volumeInfo.description}}
+                </p>
+                <br/>
+                <span>authors:</span>
+                <br/>
+                <span *ngFor="let author of bookDetails.volumeInfo.authors">{{author}}</span>
+            </mat-card-content>
+            <mat-card-actions align="center">
+                <button mat-raised-button color="primary" (click)="addToCard(bookDetails.id)">Add to cart</button>
+                <button mat-raised-button color="primary" (click)="buyNow(bookDetails.id)">Buy now</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

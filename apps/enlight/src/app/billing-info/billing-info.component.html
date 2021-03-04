@@ -1,0 +1,25 @@
+<div class="content" fxLayoutAlign="center center">
+    <form [formGroup]="billingInfoForm" (submit)="buyNow()">
+        <mat-card>
+            <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+                <mat-card-title>Billing info</mat-card-title>
+            </mat-card-header>
+            <mat-form-field fxFlexFill color="accent">
+                <input matInput formControlName="name" type="text" placeholder="First name">
+            </mat-form-field>
+            <mat-form-field fxFlexFill color="accent">
+                <input matInput formControlName="email" type="text" placeholder="Email">
+            </mat-form-field>
+            <mat-form-field fxFlexFill color="accent">
+                <input matInput formControlName="phone" type="text" placeholder="Phone number">
+            </mat-form-field>
+            <mat-form-field fxFlexFill color="accent">
+                <mat-label>Address</mat-label>
+                <textarea formControlName="address" matInput rows="5"></textarea>
+            </mat-form-field>
+            <mat-card-actions align="right">
+                <button mat-raised-button color="primary">Buy now</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

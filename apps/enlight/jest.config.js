@@ -1,5 +1,6 @@
 module.exports = {
   displayName: 'enlight',
+  testEnvironment: 'jest-environment-jsdom',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {

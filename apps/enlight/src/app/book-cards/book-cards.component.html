@@ -1,0 +1,47 @@
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="{{fxFlexValue}}" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let book of books">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title *ngIf="book.volumeInfo.title">{{book.volumeInfo.title}}</mat-card-title>
+                <mat-card-subtitle *ngIf="book.volumeInfo.subtitle">{{book.volumeInfo.subtitle}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="!book.volumeInfo.subtitle">Subtitle unavailable to display</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content fxLayout="row">
+                <img *ngIf="!!book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail" mat-card-sm-image
+                    src="{{book.volumeInfo.imageLinks.thumbnail}}" alt="Photo of a Shiba Inu">
+                <p style="padding-left: 10px;" *ngIf="book.volumeInfo.description">
+                    {{ (book.volumeInfo.description.length > 300) ? (book.volumeInfo.description | slice:0:300) + '...'
+                    : book.volumeInfo.description }}
+                </p>
+                <p style="padding-left: 10px;" *ngIf="!book.volumeInfo.description">
+                    Description not available
+                </p>
+            </mat-card-content>
+            <mat-card-content *ngIf="displayType === 'collectionsComponent'">
+                <div>
+                    <br />
+                    <p>
+                        Billing details
+                    </p>
+                    <p>
+                        Name: <span>{{book.billingDetails.name}}</span> 
+                    </p>
+                    <p>
+                        Email: <span>{{book.billingDetails.email}}</span> 
+                    </p>
+                    <p>
+                        Phone: <span>{{book.billingDetails.phone}}</span> 
+                    </p>
+                    <p>
+                        Address: <span>{{book.billingDetails.address}}</span> 
+                    </p>
+                </div>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <a mat-button (click)="handleClick(book.id, displayType)" *ngIf="displayType === 'searchComponent'">More info..</a>
+                <a mat-button (click)="handleClick(book.id, displayType)" *ngIf="displayType === 'cartComponent'">Remove from cart</a>
+                <a mat-button *ngIf="displayType === 'collectionsComponent'">Purchased</a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

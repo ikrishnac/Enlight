@@ -1,0 +1,8 @@
+<div class="content">
+    <enlight-book-cards [books]="collections" [displayType]="'collectionsComponent'"></enlight-book-cards>
+</div>
+<div class="content" fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="collections.length === 0">
+    <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+        <mat-card fxLayoutAlign="center center"><span><mat-icon>shopping_cart</mat-icon></span>Your collections is empty</mat-card>
+    </div>
+</div>

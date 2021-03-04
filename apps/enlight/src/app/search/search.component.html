@@ -1,0 +1,16 @@
+<div class="content" fxLayout="row" fxLayoutAlign="center">
+    <form [formGroup]="searchForm" (submit)="getBooks()">
+        <mat-form-field>
+            <mat-placeholder>Search Books</mat-placeholder>
+            <input formControlName="search" matInput type="search">
+            <button mat-button matSuffix mat-stroked-button aria-label="search" type="submit">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+</div>
+<div>
+    <div class="content">
+        <enlight-book-cards [books]="books.items" [displayType]="'searchComponent'"></enlight-book-cards>
+    </div>
+</div>
