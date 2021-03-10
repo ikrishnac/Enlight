@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Iitems } from '../shared/books.model';
 import { BooksFacade } from '../store/books.facade';
 
 @Component({
@@ -9,7 +10,7 @@ import { BooksFacade } from '../store/books.facade';
 })
 export class CollectionsComponent implements OnInit, OnDestroy {
 
-  collections: [];
+  collections: Iitems[];
   collectionSubscription: Subscription;
 
   constructor(private booksFacade: BooksFacade) { }

@@ -3,22 +3,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule, Routes } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { SearchComponent } from './search/search.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BookCardsComponent } from './book-cards/book-cards.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -27,6 +17,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { BooksEffect } from './store/books.effects';
 import { BookInfoComponent } from './book-info/book-info.component';
 import { BillingInfoComponent } from './billing-info/billing-info.component';
+import { MaterialModule } from './material.module';
+import { ErrorInterceptor } from './shared/error.interceptor';
+import { NgxLoggerLevel, LoggerModule } from 'ngx-logger'
 
 
 const routes: Routes = [
@@ -38,29 +31,30 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, NavBarComponent, CartComponent, CollectionsComponent, SearchComponent, BookCardsComponent, BookInfoComponent, BillingInfoComponent],
+  declarations: [
+    AppComponent,
+    NavBarComponent,
+    CartComponent,
+    CollectionsComponent,
+    SearchComponent,
+    BookCardsComponent,
+    BookInfoComponent,
+    BillingInfoComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    LayoutModule,
-    FlexLayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatCardModule,
-    MatBadgeModule,
+    MaterialModule,
     RouterModule.forRoot(routes),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument(),
-    StoreModule.forFeature("books", booksReducer),
+    StoreModule.forFeature('books', booksReducer),
     EffectsModule.forRoot([BooksEffect]),
+    LoggerModule.forRoot({serverLoggingUrl: '', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}), 
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

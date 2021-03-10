@@ -4,7 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
-import * as BooksActions from "./../store/books.actions";
+import * as BooksActions from './../store/books.actions';
 import { of } from 'rxjs';
 import { BookCardsComponent } from './book-cards.component';
 import { BooksFacade } from '../store/books.facade';
@@ -64,7 +64,6 @@ describe('BookCardsComponent', () => {
   }));
 
   it('should handle remove books', inject([Router, BooksFacade], (mockRouter: Router, booksFacade: BooksFacade) => {
-    const spy = spyOn(mockRouter, 'navigate').and.stub();
     const facadeSpy = spyOn(booksFacade, 'removeBookFromCart').and.stub();
     component.handleClick('23jkjkjhh23', 'cartComponent');
     expect(facadeSpy).toHaveBeenCalled();

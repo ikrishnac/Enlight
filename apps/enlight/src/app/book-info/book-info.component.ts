@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Iitems } from '../shared/books.model';
 import { BooksFacade } from '../store/books.facade';
 
 @Component({
@@ -9,8 +10,8 @@ import { BooksFacade } from '../store/books.facade';
   styleUrls: ['./book-info.component.css']
 })
 export class BookInfoComponent implements OnInit, OnDestroy {
-  bookId: any;
-  bookDetails: any;
+  bookId: string;
+  bookDetails: Iitems;
   bookIdSubscription: Subscription;
   bookDetailsSubscription: Subscription;
 
@@ -28,12 +29,12 @@ export class BookInfoComponent implements OnInit, OnDestroy {
     });
   }
 
-  addToCard(bookId): void {
+  addToCard(bookId: string): void {
     this.booksFacade.addBooksToCart(bookId);
     this.router.navigate(['search']);
   }
 
-  buyNow(bookId): void {
+  buyNow(bookId: string): void {
     this.router.navigate(['billing-info/' + bookId]);
   }
 

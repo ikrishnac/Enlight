@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Iitems } from '../shared/books.model';
 import { BooksFacade } from '../store/books.facade';
 
 @Component({
@@ -10,7 +11,7 @@ import { BooksFacade } from '../store/books.facade';
 })
 export class CartComponent implements OnInit, OnDestroy {
 
-  cart: [];
+  cart: Iitems[];
   cartSubscription: Subscription;
 
   constructor(private router: Router, private booksFacade: BooksFacade) { }

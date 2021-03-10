@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Iitems } from '../shared/books.model';
 import { BooksFacade } from '../store/books.facade';
 
 @Component({
@@ -9,8 +10,8 @@ import { BooksFacade } from '../store/books.facade';
 })
 export class BookCardsComponent implements OnInit {
 
-  @Input() books: any;
-  @Input() displayType: any;
+  @Input() books: Iitems[];
+  @Input() displayType: string;
   fxFlexValue = '30%';
   constructor(private router: Router, private booksFacade: BooksFacade) { }
 
@@ -18,7 +19,7 @@ export class BookCardsComponent implements OnInit {
     this.fxFlexValue = this.displayType === 'searchComponent' ? '30%' : '100%';
   }
 
-  handleClick(bookId: any, displayType: any): void {
+  handleClick(bookId: string, displayType: string): void {
     if (displayType === 'searchComponent') {
       this.booksFacade.loadBookDetails(bookId);
       this.router.navigate(['search/book-info/' + bookId]);

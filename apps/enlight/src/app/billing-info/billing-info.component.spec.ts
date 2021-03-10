@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from "@angular/router/testing";
+import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { BooksFacade } from '../store/books.facade';
@@ -11,9 +11,8 @@ import { BillingInfoComponent } from './billing-info.component';
 describe('BillingInfoComponent', () => {
   let component: BillingInfoComponent;
   let fixture: ComponentFixture<BillingInfoComponent>;
-  let router: Router;
-  let books = require('./../../testData.json');
-  let storeMock = {};
+  const books = require('./../../testData.json');
+  const storeMock = {};
   let facadeMock;
 
   beforeEach(async () => {
@@ -45,7 +44,6 @@ describe('BillingInfoComponent', () => {
     fixture = TestBed.createComponent(BillingInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    router = TestBed.inject(Router);
   });
 
   it('should create', () => {

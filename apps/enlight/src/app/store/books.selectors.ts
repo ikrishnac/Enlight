@@ -1,9 +1,9 @@
-import { BooksState } from "./../shared/books.model";
-import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { BooksState } from './../shared/books.model';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 
 const getBooksFeatureState = createFeatureSelector<BooksState>(
-  "books"
+  'books'
 );
 
 export const getBooks = createSelector(
@@ -13,7 +13,7 @@ export const getBooks = createSelector(
 
 export const getBookInfo = createSelector(
   getBooksFeatureState,
-  (state: BooksState, id: any) => {
+  (state: BooksState, id: string) => {
     // istanbul ignore else
     if (!!state.books && state.books.items) {
       return state.books.items.find(book => {

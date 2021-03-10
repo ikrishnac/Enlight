@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Ibooks } from '../shared/books.model';
 import { BooksFacade } from '../store/books.facade';
 
 
@@ -13,7 +14,7 @@ import { BooksFacade } from '../store/books.facade';
 export class SearchComponent implements OnInit, OnDestroy {
 
   searchForm: FormGroup;
-  books: any;
+  books: Ibooks;
   booksSubscription$: Subscription;
 
   constructor(private formBuilder: FormBuilder, private booksFacade: BooksFacade) { }

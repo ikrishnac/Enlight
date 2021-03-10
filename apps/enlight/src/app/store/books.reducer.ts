@@ -1,6 +1,6 @@
-import * as booksActions from "./books.actions";
-import * as fromRoot from "./store";
-import { BooksState } from "./../shared/books.model";
+import * as booksActions from './books.actions';
+import * as fromRoot from './store';
+import { BooksState } from './../shared/books.model';
 
 
 export interface AppState extends fromRoot.State {
@@ -8,14 +8,14 @@ export interface AppState extends fromRoot.State {
 }
 
 export const initialState: BooksState = {
-  books: [],
-  searchString: "",
-  loadBookDetails: "",
+  books : { items: []},
+  searchString: '',
+  loadBookDetails: '',
   cart: [],
   collections: [],
   loading: false,
   loaded: false,
-  error: ""
+  error: ''
 };
 
 export function booksReducer(
@@ -96,7 +96,7 @@ export function booksReducer(
     case booksActions.BooksActionTypes.LOAD_BOOKS_FAIL: {
       return {
         ...state,
-        books: [],
+        books: { items: []},
         loading: false,
         loaded: false,
         error: action.payload

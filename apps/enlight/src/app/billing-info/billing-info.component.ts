@@ -11,9 +11,9 @@ import { BooksFacade } from '../store/books.facade';
   styleUrls: ['./billing-info.component.css']
 })
 export class BillingInfoComponent implements OnInit, OnDestroy {
-  params: any;
+  params: string;
   billingInfoForm: FormGroup;
-  bookId: any;
+  bookId: string;
   paramSubscription: Subscription;
   selectedBookSubscription: Subscription;
 

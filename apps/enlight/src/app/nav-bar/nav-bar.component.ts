@@ -3,16 +3,17 @@ import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BooksFacade } from '../store/books.facade';
+import { Iitems } from '../shared/books.model';
 
 @Component({
-  selector: 'nav-bar',
+  selector: 'enlight-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit, OnDestroy {
 
-  cart: [];
-  collections: [];
+  cart: Iitems[];
+  collections: Iitems[];
   cartSubscription: Subscription;
   collectionSubscription: Subscription;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
