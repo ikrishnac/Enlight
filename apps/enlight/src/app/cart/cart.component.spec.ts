@@ -1,8 +1,16 @@
+import { DatePipe } from '@angular/common';
+import { HttpBackend } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
+import {
+  LoggerConfig,
+  NGXLogger,
+  NGXLoggerHttpService,
+  NGXMapperService,
+} from 'ngx-logger';
 import { of } from 'rxjs';
 import { BooksFacade } from '../store/books.facade';
 import { CartComponent } from './cart.component';
@@ -17,8 +25,8 @@ describe('CartComponent', () => {
     const storeMock = {};
 
     const facadeMock = {
-      getCartBooks$: of(books.books.cart)
-    }
+      getCartBooks$: of(books.books.cart),
+    };
 
     await TestBed.configureTestingModule({
       declarations: [CartComponent],
@@ -26,15 +34,21 @@ describe('CartComponent', () => {
       providers: [
         {
           provide: Store,
-          useValue: storeMock
+          useValue: storeMock,
         },
         {
           provide: BooksFacade,
-          useValue: facadeMock
-        }],
+          useValue: facadeMock,
+        },
+        NGXLogger,
+        NGXMapperService,
+        HttpBackend,
+        NGXLoggerHttpService,
+        LoggerConfig,
+        DatePipe,
+      ],
       imports: [RouterTestingModule],
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

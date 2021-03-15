@@ -1,6 +1,14 @@
+import { DatePipe } from '@angular/common';
+import { HttpBackend } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
+import {
+  LoggerConfig,
+  NGXLogger,
+  NGXLoggerHttpService,
+  NGXMapperService,
+} from 'ngx-logger';
 import { of } from 'rxjs';
 import { BooksFacade } from '../store/books.facade';
 import { CollectionsComponent } from './collections.component';
@@ -11,22 +19,29 @@ describe('CollectionsComponent', () => {
   const books = require('./../../testData.json');
   const storeMock = {};
   const facadeMock = {
-    getCollectionBooks$: of(books.books.collections)
-  }
-
+    getCollectionBooks$: of(books.books.collections),
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CollectionsComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [{
-        provide: Store,
-        useValue: storeMock
-      },
-      {
-        provide: BooksFacade,
-        useValue: facadeMock
-      }]
+      providers: [
+        {
+          provide: Store,
+          useValue: storeMock,
+        },
+        {
+          provide: BooksFacade,
+          useValue: facadeMock,
+        },
+        NGXLogger,
+        NGXMapperService,
+        HttpBackend,
+        NGXLoggerHttpService,
+        LoggerConfig,
+        DatePipe,
+      ],
     }).compileComponents();
   });
 

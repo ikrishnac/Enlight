@@ -11,6 +11,14 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { BooksFacade } from '../store/books.facade';
+import {
+  LoggerConfig,
+  NGXLogger,
+  NGXLoggerHttpService,
+  NGXMapperService,
+} from 'ngx-logger';
+import { HttpBackend } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 describe('NavBarComponent', () => {
   let component: NavBarComponent;
@@ -21,33 +29,42 @@ describe('NavBarComponent', () => {
 
   const facadeMock = {
     getCartBooks$: of(books.books.cart),
-    getCollectionBooks$: of(books.books.collections)
-  }
+    getCollectionBooks$: of(books.books.collections),
+  };
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [NavBarComponent],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [
-        {
-          provide: Store,
-          useValue: storeMock
-        },
-        {
-          provide: BooksFacade,
-          useValue: facadeMock
-        }],
-      imports: [
-        NoopAnimationsModule,
-        LayoutModule,
-        MatButtonModule,
-        MatIconModule,
-        MatListModule,
-        MatSidenavModule,
-        MatToolbarModule,
-      ]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [NavBarComponent],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        providers: [
+          {
+            provide: Store,
+            useValue: storeMock,
+          },
+          {
+            provide: BooksFacade,
+            useValue: facadeMock,
+          },
+          NGXLogger,
+          NGXMapperService,
+          HttpBackend,
+          NGXLoggerHttpService,
+          LoggerConfig,
+          DatePipe,
+        ],
+        imports: [
+          NoopAnimationsModule,
+          LayoutModule,
+          MatButtonModule,
+          MatIconModule,
+          MatListModule,
+          MatSidenavModule,
+          MatToolbarModule,
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NavBarComponent);

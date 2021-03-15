@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { BooksService } from './books.service';
 
 describe('BooksService', () => {
@@ -7,9 +7,7 @@ describe('BooksService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientModule,
-      ]
+      imports: [HttpClientModule],
     });
     service = TestBed.inject(BooksService);
   });
@@ -18,9 +16,9 @@ describe('BooksService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should  call getBooks', inject([BooksService], (booksService: BooksService) => {
-    const httpSpy = spyOn(booksService, 'getBooks').and.stub();
-    service.getBooks('java');
-    expect(httpSpy).toHaveBeenCalledTimes(1);
-  }));
+  it('should be call getBooks', () => {
+    const q = 'java';
+    service.getBooks(q);
+    expect(service['http'].get).toBeDefined();
+  });
 });
